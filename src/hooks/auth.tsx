@@ -30,6 +30,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
     if (token && user) {
+      // eslint-disable-next-line dot-notation
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       return { token, user: JSON.parse(user) };
     }
     return {} as AuthState;
@@ -45,6 +47,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@GoBarber:token', token);
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+    // eslint-disable-next-line dot-notation
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);
