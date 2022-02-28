@@ -7,6 +7,7 @@ import ResetPassword from '../pages/ResetPassword';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import PrivateRoute from './PrivateRoute';
+import Profile from '../pages/Profile';
 
 const RoutesComponent: React.FC = () => (
   <Routes>
@@ -19,6 +20,14 @@ const RoutesComponent: React.FC = () => (
       element={
         <PrivateRoute>
           <Dashboard />
+        </PrivateRoute>
+      }
+    />
+    <Route
+      path="/profile"
+      element={
+        <PrivateRoute>
+          <Profile />
         </PrivateRoute>
       }
     />
