@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable prettier/prettier */
 import React, { ChangeEvent, FormEvent, useCallback, useRef } from 'react';
 import { FiMail, FiLock, FiUser, FiCamera, FiArrowLeft } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -16,6 +18,8 @@ interface ProfileFormData {
   name: string;
   email: string;
   password: string;
+  old_password: string;
+  password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
@@ -34,22 +38,56 @@ const Profile: React.FC = () => {
           email: Yup.string()
             .required('E-mail obrigatório')
             .email('Digite um e-mail válido'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
+            is: (val: string) => !!val.length,
+            then: Yup.string().required('Campo obrigatório'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: (val: string) => !!val.length,
+              then: Yup.string().required('Campo obrigatório'),
+              otherwise: Yup.string(),
+            })
+            .oneOf(
+              [Yup.ref('password'), null],
+              'Confirmação de password incorreta',
+            ),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        const { name, email, old_password, password, password_confirmation } =
+          data;
+
+        // if old_password is filled then add to the object, otherwise just send name and email
+        const formData = {
+          name,
+          email,
+          ...(data.old_password
+            ? {
+              old_password,
+              password,
+              password_confirmation,
+            }
+            : {}),
+        };
+
+        const response = await api.put('/profile', formData);
+
+        updateUser(response.data.user);
 
         addToast({
           type: 'success',
-          title: 'Registo realizado',
-          description: 'Já pode fazer o seu logon no goBarber',
+          title: 'Perfil atualizado',
+          description:
+            'As suas informações de perfil foram atualizado com sucesso',
         });
 
-        navigate('/');
+        navigate('/dashboard');
       } catch (error: unknown) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -59,8 +97,8 @@ const Profile: React.FC = () => {
         // disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro no registo',
-          description: 'Ocorreu um erro a fazer o registo, tente novamente',
+          title: 'Erro na atualização',
+          description: 'Ocorreu um erro ao atualizar o perfil',
         });
       }
     },
