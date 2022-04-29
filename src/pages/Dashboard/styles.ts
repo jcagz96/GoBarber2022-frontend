@@ -17,11 +17,19 @@ export const HeaderContent = styled.div`
   > img {
     height: 80px;
   }
-  button {
+  > div + div {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    > div {
+      margin: 10px;
+    }
+  }
+
+  button {
     background: transparent;
     border: 0;
-
     svg {
       color: #999591;
       width: 20px;

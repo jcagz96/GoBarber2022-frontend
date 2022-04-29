@@ -1,6 +1,12 @@
-import { createGlobalStyle } from 'styled-components';
+/* eslint-disable prettier/prettier */
+import { createGlobalStyle, css } from 'styled-components';
+import { useTheme } from '../hooks/theme';
 
-export default createGlobalStyle`
+interface GlobalStyleProps {
+  theme: string;
+}
+
+export default createGlobalStyle<GlobalStyleProps>`
   *{
     margin: 0;
     padding: 0;
@@ -10,6 +16,11 @@ export default createGlobalStyle`
 
   body{
     background: #312E38;
+    ${(props) =>
+    props.theme === 'light' &&
+    css`
+        background: #c53030;
+      `}
     color: #FFF;
     -webkit-font-smoothing: antialiased;
   }

@@ -4,6 +4,8 @@ import { isToday, format, parseISO, isAfter } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { Link } from 'react-router-dom';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 import {
   Container,
   Header,
@@ -17,10 +19,11 @@ import {
   Appointment,
 } from './styles';
 import 'react-day-picker/lib/style.css';
-
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 import api from '../../services/api';
+import './styles.css';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -39,6 +42,7 @@ interface Appointment {
 
 const Dashboard: React.FC = () => {
   const { user, signOut } = useAuth();
+  const { theme, switchTheme } = useTheme();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
@@ -151,9 +155,19 @@ const Dashboard: React.FC = () => {
               </Link>
             </div>
           </Profile>
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
+          <div>
+            <Toggle
+              style={{ marginLeft: 19 }}
+              className="dark-mode-toggle"
+              checked={theme === 'dark'}
+              onChange={switchTheme}
+              icons={{ checked: '🔆', unchecked: '🌙' }}
+              aria-label="Dark mode toggle"
+            />
+            <button type="button" onClick={signOut}>
+              <FiPower />
+            </button>
+          </div>
         </HeaderContent>
       </Header>
       <Content>
