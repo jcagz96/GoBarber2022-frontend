@@ -8,8 +8,6 @@ import darkTheme from './themes/dark';
 const GlobalComponent: React.FC = ({ children }) => {
   const { theme } = useTheme();
 
-  console.log(`tema no GlobalComponent: ${theme}`);
-
   return (
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

@@ -4,9 +4,17 @@ import signUpBagroundImg from '../../assets/sign-up-background.png';
 
 export const Container = styled.div`
   height: 100vh;
-
   display: flex;
   align-items: stretch;
+  position: relative;
+
+  .dark-mode-toggle {
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+  }
 `;
 
 export const Content = styled.div`

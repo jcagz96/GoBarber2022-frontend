@@ -7,7 +7,10 @@ export const Container = styled.div`
     background: ${(props) => props.theme.colors.secundary};
     display: flex;
     align-items: center;
-    div {
+    > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;

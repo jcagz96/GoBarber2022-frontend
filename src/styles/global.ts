@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 
 export default createGlobalStyle`

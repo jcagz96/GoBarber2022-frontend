@@ -6,6 +6,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import Toggle from 'react-toggle';
 import { Container, Content, AvatarInput } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -13,6 +14,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
+import 'react-toggle/style.css';
 
 interface ProfileFormData {
   name: string;
@@ -27,6 +30,7 @@ const Profile: React.FC = () => {
   const { addToast } = useToast();
   const navigate = useNavigate();
   const { user, updateUser } = useAuth();
+  const { theme, switchTheme } = useTheme();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -131,6 +135,13 @@ const Profile: React.FC = () => {
           <Link to="/dashboard">
             <FiArrowLeft />
           </Link>
+          <Toggle
+            className="dark-mode-toggle"
+            checked={theme === 'dark'}
+            onChange={switchTheme}
+            icons={{ checked: '🔆', unchecked: '🌙' }}
+            aria-label="Dark mode toggle"
+          />
         </div>
       </header>
       <Content>

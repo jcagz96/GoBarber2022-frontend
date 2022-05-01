@@ -7,6 +7,16 @@ export const Container = styled.div`
 
   display: flex;
   align-items: stretch;
+
+  position: relative;
+
+  .dark-mode-toggle {
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+  }
 `;
 
 export const Content = styled.div`
@@ -22,11 +32,11 @@ export const Content = styled.div`
 const appearFromLeft = keyframes`
   from{
     opacity: 0;
-    transform: translateX()(-50px);
+    transform: translateX() (-50px);
   }
   to{
     opacity: 1;
-    transform: translateX()(0px);
+    transform: translateX() (0px);
   }
 `;
 
