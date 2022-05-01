@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
   const { theme } = useTheme();
 
   return (
-    <Container theme={theme} type="button" {...rest}>
+    <Container type="button" {...rest}>
       {loading ? 'Carregando...' : children}
     </Container>
   );

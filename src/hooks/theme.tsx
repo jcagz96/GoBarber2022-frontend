@@ -7,7 +7,7 @@ interface ThemeContextData {
 
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
-export const ThemeProvider: React.FC = ({ children }) => {
+export const ThemeProviderC: React.FC = ({ children }) => {
   const [theme, setTheme] = useState<string>(() => {
     const storageTheme = localStorage.getItem('@GoBarber:theme');
 
@@ -38,7 +38,7 @@ export function useTheme(): ThemeContextData {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error('useTheme must be used within an ThemeProvider');
+    throw new Error('useTheme must be used within an ThemeProviderC');
   }
   return context;
 }

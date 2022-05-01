@@ -7,10 +7,11 @@ import RoutesComponent from './routes';
 const App: React.FC = () => (
   <>
     <AppProvider>
-      <BrowserRouter>
-        <RoutesComponent />
-      </BrowserRouter>
-      <GlobalComponent />
+      <GlobalComponent>
+        <BrowserRouter>
+          <RoutesComponent />
+        </BrowserRouter>
+      </GlobalComponent>
     </AppProvider>
   </>
 );

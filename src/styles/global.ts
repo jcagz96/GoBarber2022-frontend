@@ -1,13 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { createGlobalStyle, css } from 'styled-components';
-import darkTheme from './themes/dark';
-import lightTheme from './themes/light';
 
-interface GlobalStyleProps {
-  theme: string;
-}
 
-export default createGlobalStyle<GlobalStyleProps>`
+export default createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
@@ -16,18 +11,8 @@ export default createGlobalStyle<GlobalStyleProps>`
   }
 
   body{
-    ${(props) =>
-    props.theme === 'dark' &&
-    css`
-        background: ${darkTheme.colors.primary};
-        color: ${darkTheme.colors.primaryText};
-      `}
-    ${(props) =>
-    props.theme === 'light' &&
-    css`
-        background: ${lightTheme.colors.primary};
-        color: ${lightTheme.colors.primaryText};
-      `}
+    background: ${props => (props.theme.colors.primary)};
+    color: ${props => (props.theme.colors.text)};
     -webkit-font-smoothing: antialiased;
   }
 

@@ -1,14 +1,16 @@
 import React from 'react';
 import { AuthProvider } from './auth';
+import { useTheme, ThemeProviderC } from './theme';
 import { ToastProvider } from './toast';
-import { ThemeProvider } from './theme';
+import darkTheme from '../styles/themes/dark';
+import lightTheme from '../styles/themes/light';
 
 const AppProvider: React.FC = ({ children }) => (
-  <ThemeProvider>
+  <ThemeProviderC>
     <AuthProvider>
       <ToastProvider>{children}</ToastProvider>
     </AuthProvider>
-  </ThemeProvider>
+  </ThemeProviderC>
 );
 
 export default AppProvider;
