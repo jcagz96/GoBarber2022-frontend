@@ -1,4 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
+import { useTheme } from '../../hooks/theme';
 import { Container } from './styles';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -6,10 +7,14 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => (
-  <Container type="button" {...rest}>
-    {loading ? 'Carregando...' : children}
-  </Container>
-);
+const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
+  const { theme } = useTheme();
+
+  return (
+    <Container theme={theme} type="button" {...rest}>
+      {loading ? 'Carregando...' : children}
+    </Container>
+  );
+};
 
 export default Button;
