@@ -2,8 +2,11 @@ export default {
   title: 'light',
 
   colors: {
-    primary: '#90F3FF',
+    primary: '#FFF',
     secundary: '#90BEDE',
+    third: '#90F3FF',
+
+    errorColor: '#c53030',
 
     primaryText: '#DFFDFF',
     secondaryText: '#E5E1EE',

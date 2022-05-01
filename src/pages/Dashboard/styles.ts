@@ -56,7 +56,7 @@ export const Profile = styled.div`
     line-height: 24px;
 
     span {
-      color: #f4ede8;
+      color: ${(props) => props.theme.colors.primaryText};
     }
 
     a {
@@ -131,7 +131,7 @@ export const NextAppointment = styled.aside`
 
     > strong {
       margin-left: 24px;
-      color: #fff;
+      color: ${(props) => props.theme.colors.text};
     }
 
     span {
@@ -203,7 +203,7 @@ export const Appointment = styled.div`
 
     > strong {
       margin-left: 24px;
-      color: #fff;
+      color: ${(props) => props.theme.colors.text};
       font-size: 20px;
     }
   }
@@ -212,7 +212,7 @@ export const Appointment = styled.div`
 export const Calendar = styled.aside`
   width: 380px;
   .DayPicker {
-    background: #28262e;
+    background: ${(props) => props.theme.colors.secundary};
     border-radius: 10px;
   }
   .DayPicker-wrapper {
@@ -234,11 +234,11 @@ export const Calendar = styled.aside`
   .DayPicker-Day--available:not(.DayPicker-Day--outside) {
     background: ${(props) => props.theme.colors.divider};
     border-radius: 10px;
-    color: #fff;
+    color: ${(props) => props.theme.colors.text};
   }
   .DayPicker:not(.DayPicker--interactionDisabled)
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
-    background: ${shade(0.2, '#3e3b47')};
+    background: ${(props) => shade(0.2, props.theme.colors.divider)};
   }
 
   .DayPicker-Day--today {
@@ -250,8 +250,8 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: ${(props) => props.theme.colors.accent} !important;
     border-radius: 10px;
-    color: #232129 !important;
+    color: ${(props) => props.theme.colors.third} !important;
   }
 `;

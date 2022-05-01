@@ -4,7 +4,7 @@ import { shade } from 'polished';
 export const Container = styled.div`
   > header {
     height: 144px;
-    background: #28262e;
+    background: ${(props) => props.theme.colors.secundary};
     display: flex;
     align-items: center;
     div {
@@ -12,7 +12,7 @@ export const Container = styled.div`
       max-width: 1120px;
       margin: 0 auto;
       svg {
-        color: #999591;
+        color: ${(props) => props.theme.colors.secondaryText};
         width: 24px;
         height: 24px;
       }
@@ -43,14 +43,14 @@ export const Content = styled.div`
     }
 
     a {
-      color: #f4ede8;
+      color: ${(props) => props.theme.colors.secundary};
       display: block;
       margin-top: 24px;
       text-decoration: none;
       transition: color 0.2s;
 
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${(props) => shade(0.2, props.theme.colors.secundary)};
       }
     }
   }
@@ -72,7 +72,7 @@ export const AvatarInput = styled.div`
     position: absolute;
     width: 48px;
     height: 48px;
-    background: #ff9000;
+    background: ${(props) => props.theme.colors.accent};
     border-radius: 50%;
     right: 0;
     bottom: 0;
@@ -91,11 +91,11 @@ export const AvatarInput = styled.div`
     svg {
       width: 20px;
       height: 20px;
-      color: #312e38;
+      color: ${(props) => props.theme.colors.primary};
     }
 
     &:hover {
-      background: ${shade(0.2, '#ff9000')};
+      background: ${(props) => shade(0.2, props.theme.colors.accent)};
     }
   }
 `;
