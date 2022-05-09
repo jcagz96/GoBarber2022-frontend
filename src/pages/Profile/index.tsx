@@ -13,6 +13,7 @@ import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
+import { useSocket } from '../../hooks/socket';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from '../../hooks/theme';
 import 'react-toggle/style.css';
@@ -24,6 +25,8 @@ interface ProfileFormData {
   old_password: string;
   password_confirmation: string;
 }
+
+
 
 const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

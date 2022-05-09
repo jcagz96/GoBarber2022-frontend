@@ -6,6 +6,7 @@ import DayPicker, { DayModifiers } from 'react-day-picker';
 import { Link } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
+import { io, Socket } from 'socket.io-client';
 import {
   Container,
   Header,
@@ -22,8 +23,10 @@ import 'react-day-picker/lib/style.css';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from '../../hooks/theme';
+import { useSocket } from '../../hooks/socket';
 import api from '../../services/api';
 import './styles.css';
+import { useToast } from '../../hooks/toast';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -40,15 +43,19 @@ interface Appointment {
   };
 }
 
+let socket: Socket;
+
 const Dashboard: React.FC = () => {
   const { user, signOut } = useAuth();
   const { theme, switchTheme } = useTheme();
+  // const { socket, disconnectSocket, connectSocket } = useSocket();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const { addToast } = useToast();
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) setSelectedDate(day);
@@ -141,6 +148,45 @@ const Dashboard: React.FC = () => {
     [appointments],
   );
 
+  useEffect(() => {
+    /* const socket = io(`${process.env.REACT_APP_URL}`, {
+      transports: ['websocket'],
+    }); */
+
+    try {
+      // connectSocket();
+      socket = io(`${process.env.REACT_APP_URL}`, {
+        transports: ['websocket'],
+      });
+
+      socket.emit('RegisterUserIdAndSocketId', {
+        user_id: user.id,
+        plataform: 'website',
+        date: Date.now(),
+      });
+
+      socket.on('Notification', (data) => {
+        console.log(`----> ${data.message}`);
+
+        addToast({
+          type: 'info',
+          title: 'teste',
+          description: data.message,
+        });
+      });
+    } catch (error) {
+      console.log('erro no socket-io');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /*   useEffect(
+      () => () => {
+        socket.close();
+      },
+      [socket],
+    ); */
+
   return (
     <Container>
       <Header>
@@ -150,7 +196,12 @@ const Dashboard: React.FC = () => {
             <img src={user.avatar_url} alt={user.name} />
             <div>
               <span>Bem-vindo,</span>
-              <Link to="/profile">
+              <Link
+                to="/profile"
+                onClick={() => {
+                  socket.disconnect();
+                }}
+              >
                 <strong>{user.name}</strong>
               </Link>
             </div>
@@ -172,6 +223,17 @@ const Dashboard: React.FC = () => {
       </Header>
       <Content>
         <Schedule>
+          {/* show && (
+            <Toast
+              message={{
+                id: String(Date.now()),
+                type: 'info',
+                title: 'teste',
+                description: 'olaoaloala',
+              }}
+              style={{}}
+            />
+            ) */}
           <h1>Horários Agendados</h1>
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}

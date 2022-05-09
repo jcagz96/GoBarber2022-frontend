@@ -26,7 +26,7 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       removeToast(message.id);
-    }, 3000);
+    }, 9000);
 
     // se returnar de dentro de um useeffect uma função, essa função vai ser executada automaticamente se o componente "morrer"
     // neste caso quando um toast é fechado é eliminado do array logo "morre" e é executada esta função

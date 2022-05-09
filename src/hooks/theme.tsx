@@ -18,9 +18,9 @@ export const ThemeProvider: React.FC = ({ children }) => {
   });
 
   const switchTheme = useCallback(() => {
+    const themeToStore = theme === 'light' ? 'dark' : 'light';
     setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
 
-    const themeToStore = theme === 'light' ? 'dark' : 'light';
     localStorage.setItem('@GoBarber:theme', themeToStore);
   }, [theme]);
 
