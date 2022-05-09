@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { createGlobalStyle } from 'styled-components';
+
 
 export default createGlobalStyle`
   *{
@@ -9,8 +11,8 @@ export default createGlobalStyle`
   }
 
   body{
-    background: #312E38;
-    color: #FFF;
+    background: ${props => (props.theme.colors.primary)};
+    color: ${props => (props.theme.colors.text)};
     -webkit-font-smoothing: antialiased;
   }
 

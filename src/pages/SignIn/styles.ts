@@ -4,9 +4,17 @@ import signInBagroundImg from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
   height: 100vh;
-
   display: flex;
   align-items: stretch;
+  position: relative;
+
+  .dark-mode-toggle {
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+  }
 `;
 
 export const Content = styled.div`
@@ -22,11 +30,11 @@ export const Content = styled.div`
 const appearFromLeft = keyframes`
   from{
     opacity: 0;
-    transform: translateX()(-50px);
+    transform: translateX() (-50px);
   }
   to{
     opacity: 1;
-    transform: translateX()(0px);
+    transform: translateX() (0px);
   }
 `;
 
@@ -48,20 +56,20 @@ export const AnimationContainer = styled.div`
     }
 
     a {
-      color: #f4ede8;
+      color: ${(props) => props.theme.colors.primaryText};
       display: block;
       margin-top: 24px;
       text-decoration: none;
       transition: color 0.2s;
 
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        color: ${(props) => shade(0.2, props.theme.colors.primaryText)};
       }
     }
   }
 
   > a {
-    color: #ff9000;
+    color: ${(props) => props.theme.colors.accent};
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
@@ -72,7 +80,7 @@ export const AnimationContainer = styled.div`
     transition: color 0.2s;
 
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${(props) => shade(0.2, props.theme.colors.accent)};
     }
 
     svg {

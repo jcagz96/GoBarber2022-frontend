@@ -4,6 +4,8 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import Toggle from 'react-toggle';
+import { io } from 'socket.io-client';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -11,6 +13,8 @@ import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+import 'react-toggle/style.css';
+import { useTheme } from '../../hooks/theme';
 
 interface SignInFormData {
   email: string;
@@ -23,6 +27,7 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const { theme, switchTheme } = useTheme();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -89,6 +94,13 @@ const SignIn: React.FC = () => {
         </AnimationContainer>
       </Content>
       <Background />
+      <Toggle
+        className="dark-mode-toggle"
+        checked={theme === 'dark'}
+        onChange={switchTheme}
+        icons={{ checked: '🔆', unchecked: '🌙' }}
+        aria-label="Dark mode toggle"
+      />
     </Container>
   );
 };

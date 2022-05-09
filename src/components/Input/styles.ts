@@ -9,13 +9,13 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  background: #232129;
+  background: ${(props) => props.theme.colors.third};
   border-radius: 10px;
   padding: 16px;
   width: 100%;
 
-  border: 2px solid #232129;
-  color: #666360;
+  border: 2px solid ${(props) => props.theme.colors.third};
+  color: ${(props) => props.theme.colors.divider};
 
   display: flex;
   align-items: center;
@@ -27,21 +27,21 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isErrored &&
     css`
-      border-color: #c53030;
+      border-color: props.theme.colors.errorColor;
     `}
 
   ${(props) =>
     props.isFocused &&
     css`
-      color: #ff9000;
-      border-color: #ff9000;
+      color: props.theme.colors.accent;
+      border-color: props.theme.colors.accent;
     `}
 
   ${(props) =>
     props.isFilled &&
     css`
       svg {
-        color: #ff9000;
+        color: props.theme.colors.accent;
       }
     `}
 
@@ -51,10 +51,10 @@ export const Container = styled.div<ContainerProps>`
     background: transparent;
     flex: 1;
     border: 0;
-    color: #f4ede8;
+    color: ${(props) => props.theme.colors.primaryText};
 
     &::placeholder {
-      color: #666360;
+      color: ${(props) => props.theme.colors.divider};
     }
   }
 
@@ -72,11 +72,11 @@ export const Error = styled(Tooltip)`
   }
 
   span {
-    background: #c53030;
-    color: #fff;
+    background: ${(props) => props.theme.colors.errorColor};
+    color: ${(props) => props.theme.colors.text};
 
     &::before {
-      border-color: #c53030 transparent;
+      border-color: ${(props) => props.theme.colors.errorColor} transparent;
     }
   }
 `;

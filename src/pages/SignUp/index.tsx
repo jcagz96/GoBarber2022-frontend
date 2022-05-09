@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import Toggle from 'react-toggle';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -11,6 +12,8 @@ import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
+import 'react-toggle/style.css';
+import { useTheme } from '../../hooks/theme';
 
 interface SignUpFormData {
   name: string;
@@ -22,6 +25,7 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const { theme, switchTheme } = useTheme();
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -93,6 +97,13 @@ const SignUp: React.FC = () => {
           </Link>
         </AnimationContainer>
       </Content>
+      <Toggle
+        className="dark-mode-toggle"
+        checked={theme === 'dark'}
+        onChange={switchTheme}
+        icons={{ checked: '🔆', unchecked: '🌙' }}
+        aria-label="Dark mode toggle"
+      />
     </Container>
   );
 };

@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import Toggle from 'react-toggle';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -11,6 +12,8 @@ import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
+import { useTheme } from '../../hooks/theme';
+import 'react-toggle/style.css';
 
 interface ForgotPasswordFormData {
   email: string;
@@ -21,6 +24,7 @@ const ForgotPassword: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const { addToast } = useToast();
+  const { theme, switchTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
@@ -87,13 +91,20 @@ const ForgotPassword: React.FC = () => {
             </Button>
           </Form>
 
-          <Link to="/signin">
+          <Link to="/">
             <FiLogIn />
             Voltar ao login
           </Link>
         </AnimationContainer>
       </Content>
       <Background />
+      <Toggle
+        className="dark-mode-toggle"
+        checked={theme === 'dark'}
+        onChange={switchTheme}
+        icons={{ checked: '🔆', unchecked: '🌙' }}
+        aria-label="Dark mode toggle"
+      />
     </Container>
   );
 };
