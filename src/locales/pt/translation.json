@@ -1,0 +1,36 @@
+{
+  "pages": {
+    "signIn": {
+      "title": "Faça o seu login",
+      "loginButtonText": "Entrar",
+      "forgotPassword": "Esqueci-me da senha",
+      "createAccount": "Criar Conta",
+      "passwordPlaceholder": "Senha"
+    },
+    "dashboard": {
+      "title": "Horários agendados",
+      "welcome": "Bem-vindo",
+      "nextAppointment": "Agendamento a seguir",
+      "morning": "Manhã",
+      "afternoon": "Tarde",
+      "noAppointment": "Nenhum agendamento neste período",
+      "today": "Hoje",
+      "day": "Dia",
+      "de": "de",
+      "months": [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro"
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "pages": {
+    "signIn": {
+      "title": "Do your login",
+      "loginButtonText": "Login",
+      "forgotPassword": "Forgot my password",
+      "createAccount": "Create Account",
+      "passwordPlaceholder": "Password"
+    },
+    "dashboard": {
+      "title": "Scheduled times",
+      "welcome": "Welcome",
+      "nextAppointment": "Next Appointment",
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "noAppointment": "Any appointment in this period",
+      "today": "Today",
+      "day": "Day",
+      "de": "de",
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    }
+  }
+}

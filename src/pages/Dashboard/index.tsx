@@ -2,11 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
 import { isToday, format, parseISO, isAfter } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import enGB from 'date-fns/locale/en-GB';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { Link } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import { io, Socket } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 import {
   Container,
   Header,
@@ -23,7 +25,6 @@ import 'react-day-picker/lib/style.css';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from '../../hooks/theme';
-import { useSocket } from '../../hooks/socket';
 import api from '../../services/api';
 import './styles.css';
 import { useToast } from '../../hooks/toast';
@@ -48,7 +49,7 @@ let socket: Socket;
 const Dashboard: React.FC = () => {
   const { user, signOut } = useAuth();
   const { theme, switchTheme } = useTheme();
-  // const { socket, disconnectSocket, connectSocket } = useSocket();
+  const { t, i18n } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
@@ -80,17 +81,21 @@ const Dashboard: React.FC = () => {
 
   const selectedDateAsText = useMemo(
     () =>
-      format(selectedDate, "'Dia' dd 'de' MMMM", {
-        locale: ptBR,
-      }),
-    [selectedDate],
+      format(
+        selectedDate,
+        `'${t('pages.dashboard.day')}' dd '${t('pages.dashboard.de')}' MMMM`,
+        {
+          locale: i18n.language === 'pt' ? ptBR : enGB,
+        },
+      ),
+    [i18n.language, selectedDate, t],
   );
   const selectedWeekDay = useMemo(
     () =>
       format(selectedDate, 'cccc', {
-        locale: ptBR,
+        locale: i18n.language === 'pt' ? ptBR : enGB,
       }),
-    [selectedDate],
+    [i18n.language, selectedDate],
   );
 
   const morningAppointments = useMemo(
@@ -180,13 +185,6 @@ const Dashboard: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /*   useEffect(
-      () => () => {
-        socket.close();
-      },
-      [socket],
-    ); */
-
   return (
     <Container>
       <Header>
@@ -195,7 +193,7 @@ const Dashboard: React.FC = () => {
           <Profile>
             <img src={user.avatar_url} alt={user.name} />
             <div>
-              <span>Bem-vindo,</span>
+              <span>{t('pages.dashboard.welcome')},</span>
               <Link
                 to="/profile"
                 onClick={() => {
@@ -223,27 +221,16 @@ const Dashboard: React.FC = () => {
       </Header>
       <Content>
         <Schedule>
-          {/* show && (
-            <Toast
-              message={{
-                id: String(Date.now()),
-                type: 'info',
-                title: 'teste',
-                description: 'olaoaloala',
-              }}
-              style={{}}
-            />
-            ) */}
-          <h1>Horários Agendados</h1>
+          <h1>{t('pages.dashboard.title')}</h1>
           <p>
-            {isToday(selectedDate) && <span>Hoje</span>}
+            {isToday(selectedDate) && <span>{t('pages.dashboard.today')}</span>}
             <span>{selectedDateAsText}</span>
             <span>{selectedWeekDay}</span>
           </p>
 
           {isToday(selectedDate) && nextAppointment && (
             <NextAppointment>
-              <strong>Agendamento a seguir</strong>
+              <strong>{t('pages.dashboard.nextAppointment')}</strong>
               <div>
                 <img
                   src={nextAppointment.user.avatar_url}
@@ -259,10 +246,10 @@ const Dashboard: React.FC = () => {
           )}
 
           <Section>
-            <strong>Manhã</strong>
+            <strong>{t('pages.dashboard.morning')}</strong>
 
             {morningAppointments.length === 0 && (
-              <p>Nenhum agendamento neste período</p>
+              <p>{t('pages.dashboard.noAppointment')}</p>
             )}
 
             {morningAppointments.map((appointment) => (
@@ -282,9 +269,9 @@ const Dashboard: React.FC = () => {
             ))}
           </Section>
           <Section>
-            <strong>Tarde</strong>
+            <strong>{t('pages.dashboard.afternoon')}</strong>
             {afternoonAppointments.length === 0 && (
-              <p>Nenhum agendamento neste período</p>
+              <p>{t('pages.dashboard.noAppointment')}</p>
             )}
 
             {afternoonAppointments.map((appointment) => (
@@ -315,20 +302,7 @@ const Dashboard: React.FC = () => {
             onMonthChange={handleMonthChange}
             selectedDays={selectedDate}
             onDayClick={handleDateChange}
-            months={[
-              'Janeiro',
-              'Fevereiro',
-              'Março',
-              'Abril',
-              'Maio',
-              'Junho',
-              'Julho',
-              'Agosto',
-              'Setembro',
-              'Outubro',
-              'Novembro',
-              'Dezembro',
-            ]}
+            months={t('pages.dashboard.months', { returnObjects: true })}
           />
         </Calendar>
       </Content>

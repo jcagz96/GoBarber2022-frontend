@@ -5,7 +5,7 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import Toggle from 'react-toggle';
-import { io } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -28,6 +28,7 @@ const SignIn: React.FC = () => {
   const { addToast } = useToast();
   const navigate = useNavigate();
   const { theme, switchTheme } = useTheme();
+  const { t, i18n } = useTranslation();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -67,6 +68,14 @@ const SignIn: React.FC = () => {
     [addToast, navigate, signIn],
   );
 
+  const handleSelect = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      console.log(event.target.value);
+      i18n.changeLanguage(event.target.value);
+    },
+    [i18n],
+  );
+
   return (
     <Container>
       <Content>
@@ -74,24 +83,30 @@ const SignIn: React.FC = () => {
           <img src={logoImg} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faço o seu logon</h1>
+            <h1>{t('pages.signIn.title')}</h1>
 
             <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder={t('pages.signIn.passwordPlaceholder')}
             />
-            <Button type="submit">Entrar</Button>
-            <Link to="/forgot-password">Esqueci-me da senha</Link>
+            <Button type="submit">{t('pages.signIn.loginButtonText')}</Button>
+            <Link to="/forgot-password">
+              {t('pages.signIn.forgotPassword')}
+            </Link>
           </Form>
 
           <Link to="/signup">
             <FiLogIn />
-            Criar conta
+            {t('pages.signIn.createAccount')}
           </Link>
         </AnimationContainer>
+        <select onChange={handleSelect} name="cars" id="cars">
+          <option value="pt">Português</option>
+          <option value="en">Inglês</option>
+        </select>
       </Content>
       <Background />
       <Toggle
