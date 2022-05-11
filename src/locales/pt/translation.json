@@ -5,7 +5,48 @@
       "loginButtonText": "Entrar",
       "forgotPassword": "Esqueci-me da senha",
       "createAccount": "Criar Conta",
-      "passwordPlaceholder": "Senha"
+      "passwordPlaceholder": "Senha",
+      "tooltipErrorEmail": "Email obrigatório",
+      "tooltipErrorEmailText": "Digite um e-mail válido",
+      "tooltipErrorMandatoryPassword": "Senha obrigatória",
+      "loginErrorTitle": "Erro na autenticação",
+      "loginErrorDescription": "Ocorreu um erro a fazer login, confirme as credenciais"
+    },
+    "signUp": {
+      "title": "Faça o seu Registo",
+      "loginButtonText": "Registar",
+      "namePlaceholder": "Nome",
+      "passwordPlaceholder": "Senha",
+      "backToLogin": "Voltar ao login",
+      "tooltipErrorName": "Nome obrigatório",
+      "tooltipErrorEmail": "Email obrigatório",
+      "tooltipErrorEmailText": "Digite um e-mail válido",
+      "tooltipErrorMandatoryPassword": "No mínimo 6 dígitos",
+      "createAccountErrorTitle": "Erro no registo",
+      "createAccountErrorDescription": "Ocorreu um erro a fazer o registo, tente novamente",
+      "createAccountSucessTitle": "Registo realizado",
+      "createAccountSucessDescription": "Já pode fazer o seu logon no goBarber"
+    },
+    "forgotPassword": {
+      "recoverPass": "Recuperar Senha",
+      "recoverPassBtnText": "Recuperar",
+      "backToLogin": "Voltar ao login",
+      "tooltipErrorEmail": "Email obrigatório",
+      "tooltipErrorEmailText": "Digite um e-mail válido",
+      "recoverSucessTitle": "E-mail de recuperação enviado",
+      "recoverSucessDescription": "Enviámos um e-mail para confirmar a recuperação de senha, verifique a sua caixa de entrada",
+      "recoverErrorTitle": "Erro na recuperação de senha",
+      "recoverErrorDescription": "Ocorreu um erro ao tentar realizar a recuperação de senha"
+    },
+    "resetPassword": {
+      "title": "Redefinir Password",
+      "changePassButtonText": "Alterar password",
+      "newPasswordPlaceholder": "Nova password",
+      "newPasswordConfirmationPlaceholder": "Confirmação da password",
+      "tooltipErrorPassword": "Password obrigatória",
+      "tooltipErrorPasswordConfirm": "Confirmação de password incorreta",
+      "createAccountErrorTitle": "Erro ao redefinir password",
+      "createAccountErrorDescription": "Ocorreu um erro ao redefinir a sua senha, tente novamente"
     },
     "dashboard": {
       "title": "Horários agendados",
@@ -30,7 +71,47 @@
         "Outubro",
         "Novembro",
         "Dezembro"
+      ],
+      "daysOfWeekFirstLetter": [
+        "D",
+        "S",
+        "T",
+        "Q",
+        "Q",
+        "S",
+        "S"
       ]
+    },
+    "profile": {
+      "title": "Meu Perfil",
+      "namePlaceholder": "Nome",
+      "currentPassPlaceholder": "Password Atual",
+      "newPassPlaceholder": "Nova Password",
+      "confirmPassPlaceholder": "Confirmar Password",
+      "confirmChangesBtnText": "Confirmar Alterações",
+      "avatarUpdateSuccessTitle": "Avatar atualizado",
+      "updateSucessTitle": "Perfil atualizado",
+      "updateSucessDescription": "As suas informações de perfil foram atualizado com sucesso",
+      "updateErrorTitle": "Erro na atualização",
+      "updateErrorDescription": "Ocorreu um erro ao atualizar o perfil",
+      "tooltipErrorName": "Nome obrigatório",
+      "tooltipErrorEmail": "Email obrigatório",
+      "tooltipErrorEmailText": "Digite um e-mail válido",
+      "tooltipErrorMandatoryField": "Campo obrigatório",
+      "tooltipErrorConfirmPass": "Confirmação de password incorreta"
+    }
+  },
+  "commun": {
+    "loading": "Carregando",
+    "languages": {
+      "portuguese": {
+        "code": "pt",
+        "text": "Português"
+      },
+      "english": {
+        "code": "en",
+        "text": "Inglês"
+      }
     }
   }
 }

@@ -12,6 +12,7 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'pt',
   keySeparator: '.',
   interpolation: { escapeValue: false },
+  debug: true,
 });
 
 export default i18n;

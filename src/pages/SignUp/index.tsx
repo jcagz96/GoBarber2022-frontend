@@ -5,6 +5,7 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import Toggle from 'react-toggle';
+import { useTranslation } from 'react-i18next';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -26,6 +27,7 @@ const SignUp: React.FC = () => {
   const { addToast } = useToast();
   const navigate = useNavigate();
   const { theme, switchTheme } = useTheme();
+  const { t } = useTranslation();
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -33,11 +35,14 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'),
+          name: Yup.string().required(`${t('pages.signUp.tooltipErrorName')}`),
           email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+            .required(`${t('pages.signUp.tooltipErrorEmail')}`)
+            .email(`${t('pages.signUp.tooltipErrorEmailText')}`),
+          password: Yup.string().min(
+            6,
+            `${t('pages.signUp.tooltipErrorMandatoryPassword')}`,
+          ),
         });
 
         await schema.validate(data, {
@@ -48,8 +53,8 @@ const SignUp: React.FC = () => {
 
         addToast({
           type: 'success',
-          title: 'Registo realizado',
-          description: 'Já pode fazer o seu logon no goBarber',
+          title: `${t('pages.signUp.createAccountSucessTitle')}`,
+          description: `${t('pages.signUp.createAccountSucessDescription')}`,
         });
 
         navigate('/');
@@ -62,12 +67,12 @@ const SignUp: React.FC = () => {
         // disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro no registo',
-          description: 'Ocorreu um erro a fazer o registo, tente novamente',
+          title: `${t('pages.signUp.createAccountErrorTitle')}`,
+          description: `${t('pages.signUp.createAccountErrorDescription')}`,
         });
       }
     },
-    [addToast, navigate],
+    [addToast, navigate, t],
   );
 
   return (
@@ -78,22 +83,26 @@ const SignUp: React.FC = () => {
           <img src={logoImg} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faço o seu registo</h1>
+            <h1>{t('pages.signUp.title')}</h1>
 
-            <Input name="name" icon={FiUser} placeholder="Nome" />
+            <Input
+              name="name"
+              icon={FiUser}
+              placeholder={t('pages.signUp.namePlaceholder')}
+            />
             <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder={t('pages.signUp.passwordPlaceholder')}
             />
-            <Button type="submit">Registar</Button>
+            <Button type="submit">{t('pages.signUp.loginButtonText')}</Button>
           </Form>
 
           <Link to="/">
             <FiArrowLeft />
-            Voltar para logon
+            {t('pages.signUp.backToLogin')}
           </Link>
         </AnimationContainer>
       </Content>

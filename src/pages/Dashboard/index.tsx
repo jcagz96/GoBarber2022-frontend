@@ -66,6 +66,13 @@ const Dashboard: React.FC = () => {
     setCurrentMonth(month);
   }, []);
 
+  const handleSelect = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      i18n.changeLanguage(event.target.value);
+    },
+    [i18n],
+  );
+
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
       .filter((monthDay) => monthDay.available === false)
@@ -154,12 +161,7 @@ const Dashboard: React.FC = () => {
   );
 
   useEffect(() => {
-    /* const socket = io(`${process.env.REACT_APP_URL}`, {
-      transports: ['websocket'],
-    }); */
-
     try {
-      // connectSocket();
       socket = io(`${process.env.REACT_APP_URL}`, {
         transports: ['websocket'],
       });
@@ -191,7 +193,7 @@ const Dashboard: React.FC = () => {
         <HeaderContent>
           <img src={logoImg} alt="GoBarber" />
           <Profile>
-            <img src={user.avatar_url} alt={user.name} />
+            {user.avatar_url && <img src={user.avatar_url} alt={user.name} />}
             <div>
               <span>{t('pages.dashboard.welcome')},</span>
               <Link
@@ -213,6 +215,24 @@ const Dashboard: React.FC = () => {
               icons={{ checked: '🔆', unchecked: '🌙' }}
               aria-label="Dark mode toggle"
             />
+            <select onChange={handleSelect} name="language" id="language">
+              <option
+                selected={
+                  i18n.language === `${t('commun.languages.portuguese.code')}`
+                }
+                value={t('commun.languages.portuguese.code')}
+              >
+                {t('commun.languages.portuguese.text')}
+              </option>
+              <option
+                selected={
+                  i18n.language === `${t('commun.languages.english.code')}`
+                }
+                value={t('commun.languages.english.code')}
+              >
+                {t('commun.languages.english.text')}
+              </option>
+            </select>
             <button type="button" onClick={signOut}>
               <FiPower />
             </button>
@@ -293,7 +313,10 @@ const Dashboard: React.FC = () => {
         </Schedule>
         <Calendar>
           <DayPicker
-            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+            locale={i18n.language}
+            weekdaysShort={t('pages.dashboard.daysOfWeekFirstLetter', {
+              returnObjects: true,
+            })}
             fromMonth={new Date()}
             disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
             modifiers={{

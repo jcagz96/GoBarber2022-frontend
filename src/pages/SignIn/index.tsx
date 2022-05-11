@@ -37,9 +37,11 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha obrigatória'),
+            .required(`${t('pages.signIn.tooltipErrorEmail')}`)
+            .email(`${t('pages.signIn.tooltipErrorEmailText')}`),
+          password: Yup.string().required(
+            `${t('pages.signIn.tooltipErrorMandatoryPassword')}`,
+          ),
         });
 
         await schema.validate(data, {
@@ -60,12 +62,12 @@ const SignIn: React.FC = () => {
         // disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro a fazer login, confirme as credenciais',
+          title: `${t('pages.signIn.loginErrorTitle')}`,
+          description: `${t('pages.signIn.loginErrorDescription')}`,
         });
       }
     },
-    [addToast, navigate, signIn],
+    [addToast, navigate, signIn, t],
   );
 
   const handleSelect = useCallback(
@@ -103,9 +105,13 @@ const SignIn: React.FC = () => {
             {t('pages.signIn.createAccount')}
           </Link>
         </AnimationContainer>
-        <select onChange={handleSelect} name="cars" id="cars">
-          <option value="pt">Português</option>
-          <option value="en">Inglês</option>
+        <select onChange={handleSelect} name="language" id="language">
+          <option value={t('commun.languages.portuguese.code')}>
+            {t('commun.languages.portuguese.text')}
+          </option>
+          <option value={t('commun.languages.english.code')}>
+            {t('commun.languages.english.text')}
+          </option>
         </select>
       </Content>
       <Background />

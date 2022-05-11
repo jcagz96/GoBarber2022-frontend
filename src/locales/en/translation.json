@@ -5,7 +5,38 @@
       "loginButtonText": "Login",
       "forgotPassword": "Forgot my password",
       "createAccount": "Create Account",
-      "passwordPlaceholder": "Password"
+      "passwordPlaceholder": "Password",
+      "tooltipErrorEmail": "Email is required",
+      "tooltipErrorEmailText": "Enter a valid email",
+      "tooltipErrorMandatoryPassword": "Password is required",
+      "loginErrorTitle": "Authentication error",
+      "loginErrorDescription": "An authentication error ocurred, check your credentials"
+    },
+    "signUp": {
+      "title": "Create Your Account",
+      "loginButtonText": "Create Account",
+      "namePlaceholder": "Name",
+      "passwordPlaceholder": "Password",
+      "backToLogin": "Back To Login",
+      "tooltipErrorName": "Name is required",
+      "tooltipErrorEmail": "Email is required",
+      "tooltipErrorEmailText": "Enter a valid email",
+      "tooltipErrorMandatoryPassword": "At least 6 digits",
+      "createAccountErrorTitle": "Error Creating Account",
+      "createAccountErrorDescription": "An error ocurred when creating account, try again",
+      "createAccountSucessTitle": "Account created sucessfully",
+      "createAccountSucessDescription": "You're now able to login in GoBarber"
+    },
+    "forgotPassword": {
+      "recoverPass": "Recover Password",
+      "recoverPassBtnText": "Recover",
+      "backToLogin": "Back to login",
+      "tooltipErrorEmail": "Email is required",
+      "tooltipErrorEmailText": "Enter a valid email",
+      "recoverSucessTitle": "Recover email was sent",
+      "recoverSucessDescription": "We sent an email to confirm password recover, verify your inbox",
+      "recoverErrorTitle": "Error recovering password",
+      "recoverErrorDescription": "An error ocurred when trying to recover password"
     },
     "dashboard": {
       "title": "Scheduled times",
@@ -30,7 +61,47 @@
         "October",
         "November",
         "December"
+      ],
+      "daysOfWeekFirstLetter": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
       ]
+    },
+    "profile": {
+      "title": "My Profile",
+      "namePlaceholder": "Name",
+      "currentPassPlaceholder": "Current Password",
+      "newPassPlaceholder": "New Password",
+      "confirmPassPlaceholder": "Confirm Password",
+      "confirmChangesBtnText": "Confirm Changes",
+      "avatarUpdateSuccessTitle": "Updated Avatar",
+      "updateSucessTitle": "Updated Profile",
+      "updateSucessDescription": "Your profile information was sucessfully updated",
+      "updateErrorTitle": "Update Error",
+      "updateErrorDescription": "An error ocurred when updating profile",
+      "tooltipErrorName": "Name is required",
+      "tooltipErrorEmail": "Email is required",
+      "tooltipErrorEmailText": "Enter a valid email",
+      "tooltipErrorMandatoryField": "Mandatory Field",
+      "tooltipErrorConfirmPass": "Wrong Password Confirmation"
+    }
+  },
+  "commun": {
+    "loading": "Loading",
+    "languages": {
+      "portuguese": {
+        "code": "pt",
+        "text": "Portuguese"
+      },
+      "english": {
+        "code": "en",
+        "text": "English"
+      }
     }
   }
 }

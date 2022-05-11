@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -27,7 +28,7 @@ function useQuery() {
 
 const ResetPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-
+  const { t } = useTranslation();
   const { addToast } = useToast();
   const navigate = useNavigate();
   const queryString = useQuery();
@@ -38,10 +39,12 @@ const ResetPassword: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          password: Yup.string().required('Password obrigatória'),
+          password: Yup.string().required(
+            `${t('pages.resetPassword.tooltipErrorPassword')}`,
+          ),
           password_confirmation: Yup.string().oneOf(
             [Yup.ref('password'), null],
-            'Confirmação de password incorreta',
+            `${t('pages.resetPassword.tooltipErrorPasswordConfirm')}`,
           ),
         });
 
@@ -72,13 +75,14 @@ const ResetPassword: React.FC = () => {
         // disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro ao redefinir password',
-          description:
-            'Ocorreu um erro ao redefinir a sua senha, tente novamente',
+          title: `${t('pages.resetPassword.createAccountErrorTitle')}`,
+          description: `${t(
+            'pages.resetPassword.createAccountErrorDescription',
+          )}`,
         });
       }
     },
-    [addToast, navigate, queryString],
+    [addToast, navigate, queryString, t],
   );
 
   return (
@@ -88,21 +92,25 @@ const ResetPassword: React.FC = () => {
           <img src={logoImg} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Refifinir password</h1>
+            <h1>{t('pages.resetPassword.title')}</h1>
 
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Nova password"
+              placeholder={t('pages.resetPassword.newPasswordPlaceholder')}
             />
             <Input
               name="password_confirmation"
               icon={FiLock}
               type="password"
-              placeholder="Confirmação da password"
+              placeholder={t(
+                'pages.resetPassword.newPasswordConfirmationPlaceholder',
+              )}
             />
-            <Button type="submit">Alterar password</Button>
+            <Button type="submit">
+              {t('pages.resetPassword.changePassButtonText')}
+            </Button>
           </Form>
         </AnimationContainer>
       </Content>

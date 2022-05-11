@@ -1,4 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../hooks/theme';
 import { Container } from './styles';
 
@@ -8,11 +9,11 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
-  const { theme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Container type="button" {...rest}>
-      {loading ? 'Carregando...' : children}
+      {loading ? `${t('commun.loading')}...` : children}
     </Container>
   );
 };
