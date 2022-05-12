@@ -38,6 +38,16 @@
       "recoverErrorTitle": "Error recovering password",
       "recoverErrorDescription": "An error ocurred when trying to recover password"
     },
+    "resetPassword": {
+      "title": "Reset Password",
+      "changePassButtonText": "Reset password",
+      "newPasswordPlaceholder": "New password",
+      "newPasswordConfirmationPlaceholder": "Password confirmation",
+      "tooltipErrorPassword": "Password is required",
+      "tooltipErrorPasswordConfirm": "Incorrect password confirmation",
+      "createAccountErrorTitle": "Error resetting password",
+      "createAccountErrorDescription": "An error ocurred when resetting your password, try again"
+    },
     "dashboard": {
       "title": "Scheduled times",
       "welcome": "Welcome",

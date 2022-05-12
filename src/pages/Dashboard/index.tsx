@@ -28,6 +28,7 @@ import { useTheme } from '../../hooks/theme';
 import api from '../../services/api';
 import './styles.css';
 import { useToast } from '../../hooks/toast';
+import { changeLanguage } from '../../locales/i18n';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -68,9 +69,9 @@ const Dashboard: React.FC = () => {
 
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      i18n.changeLanguage(event.target.value);
+      changeLanguage(event.target.value);
     },
-    [i18n],
+    [],
   );
 
   const disabledDays = useMemo(() => {
@@ -215,21 +216,17 @@ const Dashboard: React.FC = () => {
               icons={{ checked: '🔆', unchecked: '🌙' }}
               aria-label="Dark mode toggle"
             />
-            <select onChange={handleSelect} name="language" id="language">
-              <option
-                selected={
-                  i18n.language === `${t('commun.languages.portuguese.code')}`
-                }
-                value={t('commun.languages.portuguese.code')}
-              >
+            <select
+              className="custom-select"
+              defaultValue={i18n.language}
+              onChange={handleSelect}
+              name="language"
+              id="language"
+            >
+              <option value={t('commun.languages.portuguese.code')}>
                 {t('commun.languages.portuguese.text')}
               </option>
-              <option
-                selected={
-                  i18n.language === `${t('commun.languages.english.code')}`
-                }
-                value={t('commun.languages.english.code')}
-              >
+              <option value={t('commun.languages.english.code')}>
                 {t('commun.languages.english.text')}
               </option>
             </select>

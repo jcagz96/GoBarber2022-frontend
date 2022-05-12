@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import 'react-toggle/style.css';
 import { useTheme } from '../../hooks/theme';
+import { changeLanguage } from '../../locales/i18n';
 
 interface SignInFormData {
   email: string;
@@ -72,10 +73,9 @@ const SignIn: React.FC = () => {
 
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      console.log(event.target.value);
-      i18n.changeLanguage(event.target.value);
+      changeLanguage(event.target.value);
     },
-    [i18n],
+    [],
   );
 
   return (
@@ -105,7 +105,12 @@ const SignIn: React.FC = () => {
             {t('pages.signIn.createAccount')}
           </Link>
         </AnimationContainer>
-        <select onChange={handleSelect} name="language" id="language">
+        <select
+          defaultValue={i18n.language}
+          onChange={handleSelect}
+          name="language"
+          id="language"
+        >
           <option value={t('commun.languages.portuguese.code')}>
             {t('commun.languages.portuguese.text')}
           </option>

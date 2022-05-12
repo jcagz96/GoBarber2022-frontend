@@ -4,7 +4,7 @@ import { AuthProvider } from './auth';
 import { ThemeProvider } from './theme';
 import { ToastProvider } from './toast';
 import { SocketProvider } from './socket';
-import i18n from '../locales/i18n';
+import { i18n } from '../locales/i18n';
 
 const AppProvider: React.FC = ({ children }) => (
   <ThemeProvider>

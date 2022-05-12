@@ -3,16 +3,23 @@ import { initReactI18next } from 'react-i18next';
 import en from './en/translation.json';
 import pt from './pt/translation.json';
 
+const lang = localStorage.getItem('@GoBarber:i18nLang');
+
 i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },
     pt: { translation: pt },
   },
-  lng: 'pt',
-  fallbackLng: 'pt',
+  lng: lang || 'pt',
+  fallbackLng: lang || 'pt',
   keySeparator: '.',
   interpolation: { escapeValue: false },
   debug: true,
 });
 
-export default i18n;
+const changeLanguage = (idiom: string): void => {
+  localStorage.setItem('@GoBarber:i18nLang', idiom);
+  i18n.changeLanguage(idiom);
+};
+
+export { i18n, changeLanguage };
