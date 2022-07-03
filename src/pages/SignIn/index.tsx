@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import { useTranslation } from 'react-i18next';
+import Select, { SingleValue } from 'react-select';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -22,6 +23,11 @@ interface SignInFormData {
   password: string;
 }
 
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
@@ -30,6 +36,7 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const { theme, switchTheme } = useTheme();
   const { t, i18n } = useTranslation();
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -72,11 +79,38 @@ const SignIn: React.FC = () => {
   );
 
   const handleSelect = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      changeLanguage(event.target.value);
+    (newSelections: SingleValue<SelectOption>) => {
+      if (newSelections) {
+        changeLanguage(newSelections.value);
+      }
     },
     [],
   );
+
+  const loadInitialLanguage = useCallback((): SelectOption => {
+    switch (i18n.language) {
+      case `${t('commun.languages.english.code')}`:
+        return {
+          value: `${t('commun.languages.english.code')}`,
+          label: `${t('commun.languages.english.text')}`,
+        };
+      case `${t('commun.languages.portuguese.code')}`:
+        return {
+          value: `${t('commun.languages.portuguese.code')}`,
+          label: `${t('commun.languages.portuguese.text')}`,
+        };
+
+      default:
+        return {
+          value: `${t('commun.languages.english.code')}`,
+          label: `${t('commun.languages.english.text')}`,
+        };
+    }
+  }, [i18n.language, t]);
+
+  function handleSelect3(event: React.ChangeEvent<HTMLSelectElement>) {
+    return { value: event.target.value, label: 'english' };
+  }
 
   return (
     <Container>
@@ -105,19 +139,49 @@ const SignIn: React.FC = () => {
             {t('pages.signIn.createAccount')}
           </Link>
         </AnimationContainer>
-        <select
-          defaultValue={i18n.language}
+        <Select
+          className="react-select"
+          menuPlacement="top"
           onChange={handleSelect}
-          name="language"
-          id="language"
-        >
-          <option value={t('commun.languages.portuguese.code')}>
-            {t('commun.languages.portuguese.text')}
-          </option>
-          <option value={t('commun.languages.english.code')}>
-            {t('commun.languages.english.text')}
-          </option>
-        </select>
+          value={loadInitialLanguage()}
+          options={[
+            {
+              value: `${t('commun.languages.english.code')}`,
+              label: `${t('commun.languages.english.text')}`,
+            },
+            {
+              value: `${t('commun.languages.portuguese.code')}`,
+              label: `${t('commun.languages.portuguese.text')}`,
+            },
+          ]}
+          theme={{
+            borderRadius: 5,
+            colors: {
+              danger: '#ff9000',
+              dangerLight: '#312E38',
+              primary: '#ff9000',
+              primary25: '#ff9000',
+              primary50: '#ff9000',
+              primary75: 'green',
+              neutral0: '#312E38',
+              neutral5: 'orange',
+              neutral10: 'pink',
+              neutral20: '#ff9000',
+              neutral40: '#ff9000',
+              neutral30: '#ff9000',
+              neutral50: '#fff',
+              neutral60: '#ff9000',
+              neutral70: 'yellow',
+              neutral80: '#fff',
+              neutral90: 'red',
+            },
+            spacing: {
+              baseUnit: 4,
+              controlHeight: 2,
+              menuGutter: 2,
+            },
+          }}
+        />
       </Content>
       <Background />
       <Toggle

@@ -15,6 +15,18 @@ export const Container = styled.div`
     right: 0px;
     z-index: 10;
   }
+
+  .react-select {
+    margin: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 10;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 `;
 
 export const Content = styled.div`
