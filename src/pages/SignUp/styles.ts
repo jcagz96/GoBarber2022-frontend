@@ -15,6 +15,14 @@ export const Container = styled.div`
     right: 0px;
     z-index: 10;
   }
+
+  .react-select-container {
+    margin: 10px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 10;
+  }
 `;
 
 export const Content = styled.div`

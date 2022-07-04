@@ -21,6 +21,7 @@ import {
   Section,
   Appointment,
 } from './styles';
+import CustomSelect from '../../components/Select';
 import 'react-day-picker/lib/style.css';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
@@ -28,7 +29,6 @@ import { useTheme } from '../../hooks/theme';
 import api from '../../services/api';
 import './styles.css';
 import { useToast } from '../../hooks/toast';
-import { changeLanguage } from '../../locales/i18n';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -66,13 +66,6 @@ const Dashboard: React.FC = () => {
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
   }, []);
-
-  const handleSelect = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      changeLanguage(event.target.value);
-    },
-    [],
-  );
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
@@ -216,6 +209,8 @@ const Dashboard: React.FC = () => {
               icons={{ checked: '🔆', unchecked: '🌙' }}
               aria-label="Dark mode toggle"
             />
+            <CustomSelect orientation="bottom" />
+            {/*
             <select
               className="custom-select"
               defaultValue={i18n.language}
@@ -230,6 +225,7 @@ const Dashboard: React.FC = () => {
                 {t('commun.languages.english.text')}
               </option>
             </select>
+            */}
             <button type="button" onClick={signOut}>
               <FiPower />
             </button>

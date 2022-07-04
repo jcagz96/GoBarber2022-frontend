@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import CustomSelect from '../../components/Select';
 import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
@@ -105,6 +106,7 @@ const SignUp: React.FC = () => {
             {t('pages.signUp.backToLogin')}
           </Link>
         </AnimationContainer>
+        <CustomSelect orientation="top" />
       </Content>
       <Toggle
         className="dark-mode-toggle"

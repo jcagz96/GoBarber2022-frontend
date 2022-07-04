@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Container, Content, AvatarInput } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import CustomSelect from '../../components/Select';
 import getValidationErrors from '../../utils/getValidationErrors';
 import defaultAvatar from '../../assets/default_profile_avatar.svg';
 import api from '../../services/api';
@@ -139,13 +140,16 @@ const Profile: React.FC = () => {
           <Link to="/dashboard">
             <FiArrowLeft />
           </Link>
-          <Toggle
-            className="dark-mode-toggle"
-            checked={theme === 'dark'}
-            onChange={switchTheme}
-            icons={{ checked: '🔆', unchecked: '🌙' }}
-            aria-label="Dark mode toggle"
-          />
+          <div>
+            <Toggle
+              className="dark-mode-toggle"
+              checked={theme === 'dark'}
+              onChange={switchTheme}
+              icons={{ checked: '🔆', unchecked: '🌙' }}
+              aria-label="Dark mode toggle"
+            />
+            <CustomSelect orientation="bottom" />
+          </div>
         </div>
       </header>
       <Content>

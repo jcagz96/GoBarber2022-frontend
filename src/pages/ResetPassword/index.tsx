@@ -5,13 +5,16 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Toggle from 'react-toggle';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import CustomSelect from '../../components/Select';
 import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
+import { useTheme } from '../../hooks/theme';
 
 interface ResetPasswordFormData {
   password: string;
@@ -32,6 +35,7 @@ const ResetPassword: React.FC = () => {
   const { addToast } = useToast();
   const navigate = useNavigate();
   const queryString = useQuery();
+  const { theme, switchTheme } = useTheme();
 
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
@@ -113,7 +117,15 @@ const ResetPassword: React.FC = () => {
             </Button>
           </Form>
         </AnimationContainer>
+        <Toggle
+          className="dark-mode-toggle"
+          checked={theme === 'dark'}
+          onChange={switchTheme}
+          icons={{ checked: '🔆', unchecked: '🌙' }}
+          aria-label="Dark mode toggle"
+        />
       </Content>
+      <CustomSelect orientation="top" />
       <Background />
     </Container>
   );

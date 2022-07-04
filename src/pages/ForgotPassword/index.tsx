@@ -1,14 +1,15 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { FiLogIn, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import { useTranslation } from 'react-i18next';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import CustomSelect from '../../components/Select';
 import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
@@ -26,7 +27,6 @@ const ForgotPassword: React.FC = () => {
 
   const { addToast } = useToast();
   const { theme, switchTheme } = useTheme();
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleSubmit = useCallback(
@@ -97,6 +97,7 @@ const ForgotPassword: React.FC = () => {
           </Link>
         </AnimationContainer>
       </Content>
+      <CustomSelect orientation="top" />
       <Background />
       <Toggle
         className="dark-mode-toggle"

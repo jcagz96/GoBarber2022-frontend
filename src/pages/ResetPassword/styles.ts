@@ -7,6 +7,22 @@ export const Container = styled.div`
 
   display: flex;
   align-items: stretch;
+
+  .dark-mode-toggle {
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+  }
+
+  .react-select-container {
+    margin: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 10;
+  }
 `;
 
 export const Content = styled.div`

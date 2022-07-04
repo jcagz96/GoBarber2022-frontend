@@ -14,6 +14,15 @@ export const Container = styled.div`
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
+
+      > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 20px;
+      }
+
       svg {
         color: ${(props) => props.theme.colors.secondaryText};
         width: 24px;

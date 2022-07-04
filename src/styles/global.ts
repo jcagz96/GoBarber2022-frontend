@@ -10,6 +10,13 @@ export default createGlobalStyle`
     outline: 0;
   }
 
+  .react-select__indicators{
+      color: 'yellow';
+    }
+    .react-select-container{
+      color: 'yellow';
+    }
+
   body{
     background: ${props => (props.theme.colors.primary)};
     color: ${props => (props.theme.colors.text)};
